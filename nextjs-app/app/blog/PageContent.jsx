@@ -24,7 +24,7 @@ export default function EventsPage() {
               Unser <span className="text-primary">Blog</span>
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Neuigkeiten, Tipps und Inspirationen rund um Ballons und Dekoration von Ballonkunst Herzog.
+              Neuigkeiten, Tipps und Inspirationen rund um Ballons und Dekoration von Ballonkunst Lahr.
             </p>
           </motion.div>
         </div>

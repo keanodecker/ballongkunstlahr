@@ -37,7 +37,7 @@ const Footer = () => {
               <Link href="/" className="inline-block group">
                 <img
                   src="https://horizons-cdn.hostinger.com/910c39d7-e020-4090-a4fa-0fc83bdc8598/ee4d9a60f6e9d6601c17357f1d78081f.png"
-                  alt="Ballonkunst Herzog Logo"
+                  alt="Ballonkunst Lahr Logo"
                   className="h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
                 />
               </Link>
@@ -145,13 +145,16 @@ const Footer = () => {
               <Link href="/datenschutz" className="block text-gray-600 hover:text-primary transition-colors">
                 Datenschutzerklärung
               </Link>
+              <Link href="/partner" className="block text-gray-600 hover:text-primary transition-colors">
+                Partner
+              </Link>
             </div>
           </div>
         </div>
 
         <div className="mt-12 pt-8 border-t border-gray-200 text-center">
           <p className="text-gray-600">
-            © {new Date().getFullYear()} Ballonkunst Herzog. Alle Rechte vorbehalten.
+            © {new Date().getFullYear()} Ballonkunst Lahr. Alle Rechte vorbehalten.
           </p>
         </div>
       </div>
