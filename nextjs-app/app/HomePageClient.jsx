@@ -58,6 +58,7 @@ export default function HomePageClient({ settings }) {
   const aboutText = settings['about_text'] || 'Bei Ballonkunst Lahr finden Sie eine riesige Auswahl an Ballons für jeden Anlass.';
   const offerVisible = settings['offer_visible'] === 'true';
   const offerText = settings['offer_text'] || '';
+  const infoBoxVisible = settings['info_box_visible'] !== 'false';
 
   return (
     <>
@@ -120,7 +121,7 @@ export default function HomePageClient({ settings }) {
       </section>
 
       {/* Business Info Banner */}
-      <section className="relative -mt-16 z-20 container mx-auto px-4 max-w-6xl">
+      {infoBoxVisible && <section className="relative -mt-16 z-20 container mx-auto px-4 max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -156,7 +157,7 @@ export default function HomePageClient({ settings }) {
             <p className="text-gray-600 font-medium text-primary">Bitte rechtzeitig vorbestellen!</p>
           </div>
         </motion.div>
-      </section>
+      </section>}
 
       {/* Offer Banner (dynamic) */}
       {offerVisible && offerText && (
