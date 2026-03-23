@@ -154,17 +154,34 @@ export default function GalleryPage({ dbImages = [] }) {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative bg-gradient-to-br from-pink-100 to-blue-100 rounded-2xl p-16 text-center shadow-2xl"
+              className="relative rounded-2xl shadow-2xl overflow-hidden max-w-3xl w-full"
             >
               <button
                 onClick={() => setSelectedItem(null)}
-                className="absolute top-4 right-4 w-10 h-10 bg-black/10 hover:bg-black/20 rounded-full flex items-center justify-center transition-colors"
+                className="absolute top-4 right-4 z-10 w-10 h-10 bg-black/40 hover:bg-black/60 rounded-full flex items-center justify-center transition-colors"
               >
-                <X className="w-6 h-6 text-gray-700" />
+                <X className="w-6 h-6 text-white" />
               </button>
-              <div className="text-9xl mb-4">{selectedItem.emoji}</div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-1">{selectedItem.label}</h3>
-              <span className="text-sm font-semibold text-primary">{selectedItem.category}</span>
+              {selectedItem.isReal ? (
+                <>
+                  <img
+                    src={selectedItem.imageUrl}
+                    alt={selectedItem.label}
+                    className="w-full max-h-[80vh] object-contain bg-black"
+                  />
+                  {selectedItem.label && selectedItem.label !== 'Ballondekoration' && (
+                    <div className="bg-white px-6 py-4 text-center">
+                      <h3 className="text-lg font-bold text-gray-900">{selectedItem.label}</h3>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div className="bg-gradient-to-br from-pink-100 to-blue-100 p-16 text-center">
+                  <div className="text-9xl mb-4">{selectedItem.emoji}</div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-1">{selectedItem.label}</h3>
+                  <span className="text-sm font-semibold text-primary">{selectedItem.category}</span>
+                </div>
+              )}
             </motion.div>
           </motion.div>
         )}

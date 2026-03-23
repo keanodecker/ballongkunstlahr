@@ -75,29 +75,32 @@ function Toast({ message, type, onClose }) {
   );
 }
 
-// ─── Settings Tab ────────────────────────────────────────────────
-function SettingsTab({ settings, onChange, onSave, saving }) {
-  const Field = ({ label, fieldKey, type = 'text', rows }) => (
+// ─── Reusable Field component (defined OUTSIDE SettingsTab to prevent focus loss) ──
+function Field({ label, fieldKey, type, rows, value, onChange }) {
+  return (
     <div>
       <label className="block text-sm font-semibold text-gray-700 mb-1">{label}</label>
       {rows ? (
         <textarea
           rows={rows}
-          value={settings[fieldKey] ?? ''}
+          value={value ?? ''}
           onChange={(e) => onChange(fieldKey, e.target.value)}
           className="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-100 resize-none transition"
         />
       ) : (
         <input
-          type={type}
-          value={settings[fieldKey] ?? ''}
+          type={type || 'text'}
+          value={value ?? ''}
           onChange={(e) => onChange(fieldKey, e.target.value)}
           className="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-100 transition"
         />
       )}
     </div>
   );
+}
 
+// ─── Settings Tab ────────────────────────────────────────────────
+function SettingsTab({ settings, onChange, onSave, saving }) {
   return (
     <div className="space-y-8">
       {/* Hero */}
@@ -106,21 +109,40 @@ function SettingsTab({ settings, onChange, onSave, saving }) {
           🎈 Hero-Bereich (Startseite)
         </h2>
         <div className="grid gap-4">
-          <Field label="Überschrift" fieldKey="hero_headline" />
-          <Field label="Untertext" fieldKey="hero_subtext" rows={3} />
+          <Field label="Überschrift" fieldKey="hero_headline" value={settings['hero_headline']} onChange={onChange} />
+          <Field label="Untertext" fieldKey="hero_subtext" rows={3} value={settings['hero_subtext']} onChange={onChange} />
           <div className="grid grid-cols-2 gap-4">
-            <Field label="Button 1 Text" fieldKey="hero_cta1" />
-            <Field label="Button 2 Text" fieldKey="hero_cta2" />
+            <Field label="Button 1 Text" fieldKey="hero_cta1" value={settings['hero_cta1']} onChange={onChange} />
+            <Field label="Button 2 Text" fieldKey="hero_cta2" value={settings['hero_cta2']} onChange={onChange} />
           </div>
+        </div>
+      </section>
+
+      {/* Info Box */}
+      <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h2 className="text-lg font-bold text-gray-900 mb-4">ℹ️ Info-Box (unter Hero)</h2>
+        <p className="text-sm text-gray-500 mb-4">
+          Die Info-Box zeigt "19 Jahre Erfahrung", "600+ Themenballons", "Nachhaltigkeit" und "Geschenke & Deko".
+        </p>
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-1">Info-Box anzeigen?</label>
+          <select
+            value={settings['info_box_visible'] ?? 'true'}
+            onChange={(e) => onChange('info_box_visible', e.target.value)}
+            className="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-pink-400 transition"
+          >
+            <option value="true">Ja – anzeigen</option>
+            <option value="false">Nein – versteckt</option>
+          </select>
         </div>
       </section>
 
       {/* About */}
       <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-        <h2 className="text-lg font-bold text-gray-900 mb-4">ℹ️ Über uns / Ballons-Abschnitt</h2>
+        <h2 className="text-lg font-bold text-gray-900 mb-4">🎈 Über uns / Ballons-Abschnitt</h2>
         <div className="grid gap-4">
-          <Field label="Text" fieldKey="about_text" rows={4} />
-          <Field label="Bild-URL" fieldKey="about_image_url" />
+          <Field label="Text" fieldKey="about_text" rows={4} value={settings['about_text']} onChange={onChange} />
+          <Field label="Bild-URL" fieldKey="about_image_url" value={settings['about_image_url']} onChange={onChange} />
         </div>
       </section>
 
@@ -128,8 +150,8 @@ function SettingsTab({ settings, onChange, onSave, saving }) {
       <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
         <h2 className="text-lg font-bold text-gray-900 mb-4">🕐 Öffnungszeiten</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Field label="Mo, Di, Do, Fr – Vormittag" fieldKey="hours_mo_di_do_fr_vm" />
-          <Field label="Mo, Di, Do, Fr – Nachmittag" fieldKey="hours_mo_di_do_fr_nm" />
+          <Field label="Mo, Di, Do, Fr – Vormittag" fieldKey="hours_mo_di_do_fr_vm" value={settings['hours_mo_di_do_fr_vm']} onChange={onChange} />
+          <Field label="Mo, Di, Do, Fr – Nachmittag" fieldKey="hours_mo_di_do_fr_nm" value={settings['hours_mo_di_do_fr_nm']} onChange={onChange} />
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1">Mittwoch geschlossen?</label>
             <select
@@ -141,7 +163,7 @@ function SettingsTab({ settings, onChange, onSave, saving }) {
               <option value="false">Nein – Zeiten angeben</option>
             </select>
           </div>
-          <Field label="Samstag" fieldKey="hours_sa" />
+          <Field label="Samstag" fieldKey="hours_sa" value={settings['hours_sa']} onChange={onChange} />
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1">Sonntag geschlossen?</label>
             <select
@@ -171,8 +193,8 @@ function SettingsTab({ settings, onChange, onSave, saving }) {
               <option value="true">Ja – anzeigen</option>
             </select>
           </div>
-          <Field label="Banner-Text" fieldKey="offer_text" rows={2} />
-          <Field label="Banner-Bild-URL (optional)" fieldKey="offer_banner_url" />
+          <Field label="Banner-Text" fieldKey="offer_text" rows={2} value={settings['offer_text']} onChange={onChange} />
+          <Field label="Banner-Bild-URL (optional)" fieldKey="offer_banner_url" value={settings['offer_banner_url']} onChange={onChange} />
         </div>
       </section>
 
@@ -180,9 +202,9 @@ function SettingsTab({ settings, onChange, onSave, saving }) {
       <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
         <h2 className="text-lg font-bold text-gray-900 mb-4">📞 Kontaktdaten</h2>
         <div className="grid gap-4">
-          <Field label="Telefon" fieldKey="contact_phone" />
-          <Field label="E-Mail" fieldKey="contact_email" type="email" />
-          <Field label="Adresse" fieldKey="contact_address" />
+          <Field label="Telefon" fieldKey="contact_phone" value={settings['contact_phone']} onChange={onChange} />
+          <Field label="E-Mail" fieldKey="contact_email" type="email" value={settings['contact_email']} onChange={onChange} />
+          <Field label="Adresse" fieldKey="contact_address" value={settings['contact_address']} onChange={onChange} />
         </div>
       </section>
 
@@ -230,8 +252,12 @@ function BlogTab({ toast }) {
     if (!form.title.trim()) return toast('Titel ist pflicht', 'error');
     setSaving(true);
     const { error } = await supabase.from('news_posts').insert([form]);
+    if (error) {
+      setSaving(false);
+      return toast('Fehler beim Speichern', 'error');
+    }
+    await fetch('/api/revalidate', { method: 'POST' });
     setSaving(false);
-    if (error) return toast('Fehler beim Speichern', 'error');
     toast('Beitrag erstellt!', 'success');
     setForm({ title: '', content: '', image_url: '', post_date: new Date().toISOString().split('T')[0] });
     setShowForm(false);
@@ -241,6 +267,7 @@ function BlogTab({ toast }) {
   async function deletePost(id) {
     if (!confirm('Beitrag wirklich löschen?')) return;
     await supabase.from('news_posts').delete().eq('id', id);
+    await fetch('/api/revalidate', { method: 'POST' });
     toast('Beitrag gelöscht', 'success');
     loadPosts();
   }
@@ -363,6 +390,7 @@ function GalleryTab({ toast }) {
     try {
       const url = await uploadImage(file, 'gallery');
       await supabase.from('gallery_images').insert([{ image_url: url, caption: caption.trim() || null }]);
+      await fetch('/api/revalidate', { method: 'POST' });
       toast('Bild hochgeladen!', 'success');
       setCaption('');
       loadImages();
@@ -375,9 +403,9 @@ function GalleryTab({ toast }) {
   async function deleteImage(id, imageUrl) {
     if (!confirm('Bild wirklich löschen?')) return;
     await supabase.from('gallery_images').delete().eq('id', id);
-    // Remove from storage
     const path = imageUrl.split('/site-images/')[1];
     if (path) await supabase.storage.from('site-images').remove([path]);
+    await fetch('/api/revalidate', { method: 'POST' });
     toast('Bild gelöscht', 'success');
     loadImages();
   }
@@ -481,7 +509,8 @@ export default function AdminPage() {
     setSaving(true);
     try {
       await saveSettings(settings);
-      showToast('Einstellungen gespeichert!', 'success');
+      await fetch('/api/revalidate', { method: 'POST' });
+      showToast('Einstellungen gespeichert! Website wird aktualisiert.', 'success');
     } catch {
       showToast('Fehler beim Speichern', 'error');
     }

@@ -11,6 +11,7 @@ export default async function HomePage() {
     'contact_phone', 'contact_address',
     'hours_mo_di_do_fr_vm', 'hours_mo_di_do_fr_nm',
     'hours_mi_closed', 'hours_sa', 'hours_so_closed',
+    'info_box_visible',
   ]);
 
   return <HomePageClient settings={settings} />;
