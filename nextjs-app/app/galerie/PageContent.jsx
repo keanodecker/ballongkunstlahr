@@ -23,25 +23,13 @@ const galleryItems = [
   { id: 12, emoji: '💒', category: 'Hochzeit', label: 'Trauungsdekoration' },
 ];
 
-export default function GalleryPage({ dbImages = [] }) {
+export default function GalleryPage() {
   const [activeFilter, setActiveFilter] = useState('Alle');
   const [selectedItem, setSelectedItem] = useState(null);
 
-  // Merge DB images (real photos) with placeholder items
-  const allItems = [
-    ...dbImages.map((img) => ({
-      id: img.id,
-      imageUrl: img.image_url,
-      label: img.caption || 'Ballondekoration',
-      category: 'Alle',
-      isReal: true,
-    })),
-    ...galleryItems.map((item) => ({ ...item, isReal: false })),
-  ];
-
   const filteredItems = activeFilter === 'Alle'
-    ? allItems
-    : allItems.filter((item) => item.category === activeFilter || item.category === 'Alle');
+    ? galleryItems
+    : galleryItems.filter((item) => item.category === activeFilter);
 
   return (
     <div className="pt-24 min-h-screen bg-gray-50 flex flex-col">
@@ -91,31 +79,18 @@ export default function GalleryPage({ dbImages = [] }) {
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.3 }}
                   onClick={() => setSelectedItem(item)}
-                  className="aspect-square rounded-xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group overflow-hidden relative"
+                  className="aspect-square bg-gradient-to-br from-pink-100 via-blue-100 to-yellow-100 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group flex flex-col items-center justify-center"
                   whileHover={{ scale: 1.05 }}
                 >
-                  {item.isReal ? (
-                    <>
-                      <img src={item.imageUrl} alt={item.label} className="w-full h-full object-cover" />
-                      {item.label && (
-                        <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs px-2 py-1 translate-y-full group-hover:translate-y-0 transition-transform">
-                          {item.label}
-                        </div>
-                      )}
-                    </>
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-pink-100 via-blue-100 to-yellow-100 flex flex-col items-center justify-center">
-                      <div className="text-6xl mb-2 group-hover:scale-110 transition-transform duration-300">
-                        {item.emoji}
-                      </div>
-                      <p className="text-sm font-medium text-gray-600 px-2 text-center">{item.label}</p>
-                      <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <span className="text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">
-                          {item.category}
-                        </span>
-                      </div>
-                    </div>
-                  )}
+                  <div className="text-6xl mb-2 group-hover:scale-110 transition-transform duration-300">
+                    {item.emoji}
+                  </div>
+                  <p className="text-sm font-medium text-gray-600 px-2 text-center">{item.label}</p>
+                  <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">
+                      {item.category}
+                    </span>
+                  </div>
                 </motion.div>
               ))}
             </AnimatePresence>
@@ -154,34 +129,17 @@ export default function GalleryPage({ dbImages = [] }) {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative rounded-2xl shadow-2xl overflow-hidden max-w-3xl w-full"
+              className="relative bg-gradient-to-br from-pink-100 to-blue-100 rounded-2xl p-16 text-center shadow-2xl"
             >
               <button
                 onClick={() => setSelectedItem(null)}
-                className="absolute top-4 right-4 z-10 w-10 h-10 bg-black/40 hover:bg-black/60 rounded-full flex items-center justify-center transition-colors"
+                className="absolute top-4 right-4 w-10 h-10 bg-black/10 hover:bg-black/20 rounded-full flex items-center justify-center transition-colors"
               >
-                <X className="w-6 h-6 text-white" />
+                <X className="w-6 h-6 text-gray-700" />
               </button>
-              {selectedItem.isReal ? (
-                <>
-                  <img
-                    src={selectedItem.imageUrl}
-                    alt={selectedItem.label}
-                    className="w-full max-h-[80vh] object-contain bg-black"
-                  />
-                  {selectedItem.label && selectedItem.label !== 'Ballondekoration' && (
-                    <div className="bg-white px-6 py-4 text-center">
-                      <h3 className="text-lg font-bold text-gray-900">{selectedItem.label}</h3>
-                    </div>
-                  )}
-                </>
-              ) : (
-                <div className="bg-gradient-to-br from-pink-100 to-blue-100 p-16 text-center">
-                  <div className="text-9xl mb-4">{selectedItem.emoji}</div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-1">{selectedItem.label}</h3>
-                  <span className="text-sm font-semibold text-primary">{selectedItem.category}</span>
-                </div>
-              )}
+              <div className="text-9xl mb-4">{selectedItem.emoji}</div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-1">{selectedItem.label}</h3>
+              <span className="text-sm font-semibold text-primary">{selectedItem.category}</span>
             </motion.div>
           </motion.div>
         )}
