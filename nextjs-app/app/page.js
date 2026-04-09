@@ -57,7 +57,11 @@ export default function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-pink-50 via-blue-50 to-yellow-50">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img src="/hero-bg.png" alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {balloonPositions.map((pos, i) => {
             const color = balloonColors[i % balloonColors.length];
@@ -90,11 +94,11 @@ export default function HomePage() {
             >
               🎈
             </motion.div>
-            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
               Für jeden Anlass den{' '}
-              <span className="text-primary">perfekten Ballon</span>
+              <span className="text-pink-300">perfekten Ballon</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-700 mb-12 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
               Willkommen bei Ballonkunst Lahr – Ihrem Spezialgeschäft für Ballons und kreative
               Geschenkideen im Herzen von Lahr. Wir bringen Farbe in Ihr Leben!
             </p>
@@ -107,7 +111,7 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/anlasse"
-                className="inline-flex items-center justify-center border-2 border-secondary text-secondary hover:bg-secondary hover:text-white font-bold text-lg px-8 py-4 rounded-full shadow-lg transition-all duration-300 hover:scale-105"
+                className="inline-flex items-center justify-center border-2 border-white text-white hover:bg-white hover:text-secondary font-bold text-lg px-8 py-4 rounded-full shadow-lg transition-all duration-300 hover:scale-105"
               >
                 Ballons vorbestellen
               </Link>
