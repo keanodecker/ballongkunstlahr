@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Clock, MessageCircle } from 'lucide-react';
+import { MapPin, Phone, Clock, MessageCircle, Mail } from 'lucide-react';
 
 const WHATSAPP_NUMBER = '491781510567';
 
@@ -105,6 +105,14 @@ export default function ContactPage() {
               >
                 <MessageCircle className="w-6 h-6" />
                 WhatsApp öffnen
+              </a>
+
+              <a
+                href="mailto:info@ballonkunst-lahr.de"
+                className="inline-flex items-center justify-center gap-3 bg-white hover:bg-gray-50 text-gray-700 font-bold text-lg px-10 py-5 rounded-full shadow-md hover:shadow-lg border border-gray-200 transition-all duration-300 hover:scale-105 w-full max-w-xs mx-auto mt-4"
+              >
+                <Mail className="w-6 h-6 text-primary" />
+                E-Mail schreiben
               </a>
 
               <p className="text-sm text-gray-400 mt-6">
