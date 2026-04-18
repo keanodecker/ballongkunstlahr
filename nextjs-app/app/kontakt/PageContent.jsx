@@ -1,7 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Clock, MessageCircle, Mail } from 'lucide-react';
+import Link from 'next/link';
+import { MapPin, Phone, Clock, MessageCircle, Mail, MapPinned } from 'lucide-react';
 
 const WHATSAPP_NUMBER = '491781510567';
 
@@ -64,7 +65,7 @@ export default function ContactPage() {
                     </a>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 sm:col-span-2">
+                <div className="flex items-start gap-3">
                   <Clock className="w-5 h-5 text-accent mt-1 flex-shrink-0" />
                   <div>
                     <h4 className="font-semibold text-gray-900">Öffnungszeiten</h4>
@@ -72,6 +73,19 @@ export default function ContactPage() {
                       Mo, Di, Do, Fr: 09:30–12:30 &amp; 14:30–18:00<br />
                       Sa: 09:30–13:00 | Mi &amp; So: Geschlossen
                     </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <MapPinned className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Location mitbuchen</h4>
+                    <a href="mailto:mail@cesardienstleistungen.de" className="text-sm text-gray-600 hover:text-primary transition-colors">
+                      mail@cesardienstleistungen.de
+                    </a>
+                    <br />
+                    <Link href="/eventlocation" className="text-sm text-primary underline italic hover:text-primary/80 transition-colors">
+                      mehr
+                    </Link>
                   </div>
                 </div>
               </div>
