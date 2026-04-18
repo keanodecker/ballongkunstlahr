@@ -45,6 +45,7 @@ const Header = () => {
     { name: 'Halloween', path: '/services/halloween' },
     { name: 'Weihnachten', path: '/services/weihnachten' },
     { name: 'Liebe & Valentinstag', path: '/services/liebe-valentinstag' },
+    { name: 'Eventlocation', path: '/eventlocation', divider: true },
   ];
 
   return (
@@ -102,13 +103,15 @@ const Header = () => {
                     className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-white/95 backdrop-blur-md border border-gray-200 shadow-xl rounded-xl overflow-hidden z-50"
                   >
                     {serviceLinks.map((service) => (
-                      <Link
-                        key={service.path}
-                        href={service.path}
-                        className="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-primary/10 hover:text-primary transition-colors"
-                      >
-                        {service.name}
-                      </Link>
+                      <div key={service.path}>
+                        {service.divider && <hr className="border-gray-200 my-1" />}
+                        <Link
+                          href={service.path}
+                          className="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-primary/10 hover:text-primary transition-colors"
+                        >
+                          {service.name}
+                        </Link>
+                      </div>
                     ))}
                   </motion.div>
                 )}
@@ -200,17 +203,19 @@ const Header = () => {
                       className="flex flex-col pl-8 pr-4 py-2 gap-2 overflow-hidden"
                     >
                       {serviceLinks.map((service) => (
-                        <Link
-                          key={service.path}
-                          href={service.path}
-                          className={`py-2 text-sm font-medium transition-colors ${
-                            pathname === service.path
-                              ? 'text-primary'
-                              : 'text-gray-600 hover:text-primary'
-                          }`}
-                        >
-                          {service.name}
-                        </Link>
+                        <div key={service.path}>
+                          {service.divider && <hr className="border-gray-200 my-1" />}
+                          <Link
+                            href={service.path}
+                            className={`block py-2 text-sm font-medium transition-colors ${
+                              pathname === service.path
+                                ? 'text-primary'
+                                : 'text-gray-600 hover:text-primary'
+                            }`}
+                          >
+                            {service.name}
+                          </Link>
+                        </div>
                       ))}
                     </motion.div>
                   )}
