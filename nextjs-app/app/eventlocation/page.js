@@ -50,12 +50,19 @@ export default function EventlocationPage() {
               </div>
             </div>
 
+            {/* Location images */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+              <img src="/location1.jpg" alt="Vereinshaus Lahr West – Innenansicht 1" className="w-full h-56 object-cover rounded-xl" />
+              <img src="/location2.jpg" alt="Vereinshaus Lahr West – Innenansicht 2" className="w-full h-56 object-cover rounded-xl" />
+              <img src="/location3.jpg" alt="Vereinshaus Lahr West – Innenansicht 3" className="w-full h-56 object-cover rounded-xl" />
+            </div>
+
             <div className="text-center">
               <Link
                 href="/kontakt"
                 className="inline-flex items-center gap-2 text-primary hover:underline font-medium"
               >
-                ← Zurück zur Kontaktseite
+                Zu Kontaktseite
               </Link>
             </div>
           </div>
