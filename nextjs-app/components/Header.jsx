@@ -36,15 +36,16 @@ const Header = () => {
   const serviceLinks = [
     { name: 'Geburtstag', path: '/services/geburtstag' },
     { name: 'Hochzeit', path: '/services/hochzeit' },
-    { name: 'Geburt & Baby', path: '/services/geburt-baby' },
-    { name: 'Schulanfang', path: '/services/schulanfang' },
     { name: 'Kindergeburtstag', path: '/services/kindergeburtstag' },
-    { name: 'Taufe', path: '/services/taufe' },
-    { name: 'Baby Shower', path: '/services/baby-shower' },
-    { name: 'Abitur & Konfirmation', path: '/services/abitur-konfirmation' },
+    { name: 'Gender Reveal/Babyparty', path: '/services/gender-reveal-babyparty' },
+    { name: 'Geburt & Baby', path: '/services/geburt-baby' },
+    { name: 'Liebe & Valentinstag', path: '/services/liebe-valentinstag' },
+    { name: 'Religiöse Anlässe', path: '/services/religiose-anlasse' },
+    { name: 'Prüfung/Abschluss', path: '/services/prufung-abschluss' },
+    { name: 'Schulanfang', path: '/services/schulanfang' },
     { name: 'Halloween', path: '/services/halloween' },
     { name: 'Weihnachten', path: '/services/weihnachten' },
-    { name: 'Liebe & Valentinstag', path: '/services/liebe-valentinstag' },
+    { name: 'Sonstige Anlässe', path: '/services/sonstige-anlasse', divider: true },
     { name: 'Eventlocation', path: '/eventlocation', divider: true },
   ];
 

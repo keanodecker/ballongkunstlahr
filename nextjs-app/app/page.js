@@ -13,15 +13,16 @@ const balloonShapes = ['balloon-shape-round', 'balloon-shape-heart', 'balloon-sh
 const occasions = [
   { emoji: '🎂', title: 'Geburtstag', description: 'Feiern Sie mit bunten Ballons', path: '/services/geburtstag' },
   { emoji: '💍', title: 'Hochzeit', description: 'Romantische Ballondekoration', path: '/services/hochzeit' },
-  { emoji: '👶', title: 'Geburt & Baby', description: 'Süße Ballons für den Nachwuchs', path: '/services/geburt-baby' },
-  { emoji: '🎒', title: 'Schulanfang', description: 'Motivierende Schulballons', path: '/services/schulanfang' },
   { emoji: '🎊', title: 'Kindergeburtstag', description: 'Spaß für die Kleinen', path: '/services/kindergeburtstag' },
-  { emoji: '✝️', title: 'Taufe', description: 'Festliche Ballondekoration', path: '/services/taufe' },
-  { emoji: '🚿', title: 'Baby Shower', description: 'Zauberhafte Babyparty-Ballons', path: '/services/baby-shower' },
-  { emoji: '📚', title: 'Abitur & Konfirmation', description: 'Besondere Momente feiern', path: '/services/abitur-konfirmation' },
+  { emoji: '🎀', title: 'Gender Reveal/Babyparty', description: 'Unvergessliche Momente feiern', path: '/services/gender-reveal-babyparty' },
+  { emoji: '👶', title: 'Geburt & Baby', description: 'Süße Ballons für den Nachwuchs', path: '/services/geburt-baby' },
+  { emoji: '❤️', title: 'Liebe & Valentinstag', description: 'Romantische Ballons für besondere Momente', path: '/services/liebe-valentinstag' },
+  { emoji: '✝️', title: 'Religiöse Anlässe', description: 'Taufe, Konfirmation und mehr', path: '/services/religiose-anlasse' },
+  { emoji: '📚', title: 'Prüfung/Abschluss', description: 'Abitur, Abschluss und Meilensteine', path: '/services/prufung-abschluss' },
+  { emoji: '🎒', title: 'Schulanfang', description: 'Motivierende Schulballons', path: '/services/schulanfang' },
   { emoji: '🎃', title: 'Halloween', description: 'Gruselige Ballondeko', path: '/services/halloween' },
   { emoji: '🎄', title: 'Weihnachten', description: 'Festliche Weihnachtsballons', path: '/services/weihnachten' },
-  { emoji: '❤️', title: 'Liebe & Valentinstag', description: 'Romantische Ballons für besondere Momente', path: '/services/liebe-valentinstag' },
+  { emoji: '🎉', title: 'Sonstige Anlässe', description: 'Welcome, Gute Besserung, Führerschein & mehr', path: '/services/sonstige-anlasse' },
 ];
 
 const containerVariants = {
