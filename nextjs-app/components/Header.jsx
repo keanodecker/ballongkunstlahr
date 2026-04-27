@@ -60,7 +60,7 @@ const Header = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center group">
             <img
-              src="/logo.jpg"
+              src="/logo.svg"
               alt="Ballonkunst Lahr Logo"
               className="h-20 md:h-28 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
             />
