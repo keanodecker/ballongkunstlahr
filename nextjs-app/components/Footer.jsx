@@ -36,7 +36,7 @@ const Footer = () => {
             <div className="mb-6">
               <Link href="/" className="inline-block group">
                 <img
-                  src="/logo.jpg"
+                  src="/logo.svg"
                   alt="Ballonkunst Lahr Logo"
                   className="h-32 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
                 />
