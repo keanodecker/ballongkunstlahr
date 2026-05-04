@@ -2,11 +2,12 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Handshake, Send, Building2, Mail } from 'lucide-react';
+import { Handshake, Send, Building2, Mail, AlertCircle } from 'lucide-react';
 
 export default function PartnerPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
   const [formData, setFormData] = useState({
     company: '',
     name: '',
@@ -20,23 +21,29 @@ export default function PartnerPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMsg('');
 
-    const mailtoLink = `mailto:info@ballonkunst-lahr.de?subject=${encodeURIComponent(
-      `[Business] ${formData.subject} – ${formData.company}`
-    )}&body=${encodeURIComponent(
-      `Unternehmen: ${formData.company}\nAnsprechpartner: ${formData.name}\nE-Mail: ${formData.email}\n\n${formData.message}`
-    )}`;
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
 
-    window.location.href = mailtoLink;
-
-    setTimeout(() => {
+      if (res.ok) {
+        setSubmitted(true);
+        setFormData({ company: '', name: '', email: '', subject: '', message: '' });
+      } else {
+        setErrorMsg('Fehler beim Senden. Bitte versuchen Sie es erneut.');
+      }
+    } catch {
+      setErrorMsg('Fehler beim Senden. Bitte versuchen Sie es erneut.');
+    } finally {
       setIsSubmitting(false);
-      setSubmitted(true);
-      setFormData({ company: '', name: '', email: '', subject: '', message: '' });
-    }, 800);
+    }
   };
 
   return (
@@ -94,7 +101,7 @@ export default function PartnerPage() {
               <div className="text-6xl mb-4">✅</div>
               <h3 className="text-2xl font-bold text-gray-900 mb-2">Nachricht gesendet!</h3>
               <p className="text-gray-600 mb-6">
-                Ihr E-Mail-Programm sollte sich geöffnet haben. Wir melden uns so schnell wie möglich.
+                Vielen Dank für Ihre Anfrage. Wir melden uns so schnell wie möglich bei Ihnen.
               </p>
               <button
                 onClick={() => setSubmitted(false)}
@@ -190,6 +197,12 @@ export default function PartnerPage() {
                     className="w-full px-4 py-3 border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors resize-none"
                   />
                 </div>
+
+                {errorMsg && (
+                  <div className="flex items-center gap-2 text-red-500 text-sm font-medium bg-red-50 border border-red-200 rounded-lg p-3">
+                    <AlertCircle className="w-4 h-4 flex-shrink-0" /> {errorMsg}
+                  </div>
+                )}
 
                 <button
                   type="submit"
