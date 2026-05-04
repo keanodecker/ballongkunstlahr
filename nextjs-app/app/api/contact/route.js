@@ -12,7 +12,7 @@ export async function POST(request) {
 
     await resend.emails.send({
       from: 'Ballonkunst Lahr <noreply@ballonkunst-lahr.de>',
-      to: 'info@ballonkunst-lahr.de',
+      to: 'info@media-castle.com',
       replyTo: email,
       subject: `Neue Anfrage von ${name}`,
       html: `
