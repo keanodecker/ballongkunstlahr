@@ -1,13 +1,37 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { MapPin, Phone, Clock, MessageCircle, Mail, MapPinned } from 'lucide-react';
+import { MapPin, Phone, Clock, MessageCircle, Mail, MapPinned, Send, CheckCircle, AlertCircle } from 'lucide-react';
 
 const WHATSAPP_NUMBER = '491781510567';
 
 export default function ContactPage() {
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=Hallo%20Ballonkunst%20Lahr%2C%20ich%20interessiere%20mich%20f%C3%BCr%20Ihre%20Ballons!`;
+
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState('idle'); // idle | loading | success | error
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setStatus('loading');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setStatus('success');
+        setForm({ name: '', email: '', message: '' });
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
+  }
 
   return (
     <div className="pt-32 pb-20 bg-gray-50 min-h-screen">
@@ -121,13 +145,51 @@ export default function ContactPage() {
                 WhatsApp öffnen
               </a>
 
-              <a
-                href="mailto:info@ballonkunst-lahr.de"
-                className="inline-flex items-center justify-center gap-3 bg-white hover:bg-gray-50 text-gray-700 font-bold text-lg px-10 py-5 rounded-full shadow-md hover:shadow-lg border border-gray-200 transition-all duration-300 hover:scale-105 w-full max-w-xs mx-auto mt-4"
-              >
-                <Mail className="w-6 h-6 text-primary" />
-                E-Mail schreiben
-              </a>
+              {/* Contact Form */}
+              <form onSubmit={handleSubmit} className="w-full mt-6 text-left space-y-3">
+                <input
+                  type="text"
+                  placeholder="Ihr Name"
+                  required
+                  value={form.name}
+                  onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary text-sm"
+                />
+                <input
+                  type="email"
+                  placeholder="Ihre E-Mail-Adresse"
+                  required
+                  value={form.email}
+                  onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary text-sm"
+                />
+                <textarea
+                  placeholder="Ihre Nachricht"
+                  required
+                  rows={4}
+                  value={form.message}
+                  onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary text-sm resize-none"
+                />
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 disabled:opacity-60 text-white font-bold px-8 py-3 rounded-full w-full transition-all duration-300"
+                >
+                  <Send className="w-4 h-4" />
+                  {status === 'loading' ? 'Wird gesendet…' : 'Nachricht senden'}
+                </button>
+                {status === 'success' && (
+                  <div className="flex items-center gap-2 text-green-600 text-sm font-medium">
+                    <CheckCircle className="w-4 h-4" /> Vielen Dank! Wir melden uns bald bei Ihnen.
+                  </div>
+                )}
+                {status === 'error' && (
+                  <div className="flex items-center gap-2 text-red-500 text-sm font-medium">
+                    <AlertCircle className="w-4 h-4" /> Fehler beim Senden. Bitte versuchen Sie es erneut.
+                  </div>
+                )}
+              </form>
 
               <p className="text-sm text-gray-400 mt-6">
                 Oder rufen Sie uns an:{' '}
