@@ -1,4 +1,4 @@
-import { Shield, Lock, Database, Mail } from 'lucide-react';
+import { Shield, Lock, Database, Mail, Cookie } from 'lucide-react';
 
 export const metadata = {
   title: 'Datenschutzerklärung',
@@ -64,16 +64,76 @@ export default function DatenschutzPage() {
 
           <div className="bg-white rounded-2xl shadow-sm p-8 border border-gray-100">
             <div className="flex items-center gap-3 mb-6">
-              <Lock className="w-8 h-8 text-accent" />
-              <h2 className="text-2xl font-bold text-gray-900">3. Datenerfassung auf dieser Website</h2>
+              <Cookie className="w-8 h-8 text-primary" />
+              <h2 className="text-2xl font-bold text-gray-900">3. Cookies &amp; Einwilligung</h2>
             </div>
             <div className="space-y-4 text-gray-700 leading-relaxed">
-              <h3 className="text-xl font-semibold text-gray-800">Cookies</h3>
               <p>
-                Unsere Internetseiten verwenden so genannte „Cookies". Cookies sind kleine Textdateien
-                und richten auf Ihrem Endgerät keinen Schaden an.
+                Unsere Website verwendet Cookies – kleine Textdateien, die in Ihrem Browser gespeichert
+                werden. Beim ersten Besuch erscheint ein Cookie-Banner, über den Sie Ihre Einwilligung
+                erteilen oder verweigern können. Ihre Auswahl wird lokal in Ihrem Browser gespeichert
+                (LocalStorage-Schlüssel: <code className="bg-gray-100 px-1 rounded text-sm">cookieConsent</code>).
               </p>
-              <h3 className="text-xl font-semibold text-gray-800 mt-6">Server-Log-Dateien</h3>
+              <p>
+                <strong>Aktuell verwenden wir ausschließlich technisch notwendige Cookies.</strong> Kein
+                Tracking, kein Google Analytics, kein Meta Pixel und keine anderen Drittanbieter-Tools
+                sind aktiv.
+              </p>
+              <h3 className="text-xl font-semibold text-gray-800 mt-6">Cookie-Kategorien</h3>
+              <div className="space-y-3">
+                <div className="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="font-semibold">Notwendige Cookies</span>
+                    <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Immer aktiv</span>
+                  </div>
+                  <p className="text-sm text-gray-600">
+                    Technisch erforderlich für den Betrieb der Website. Dazu gehört das Speichern Ihrer
+                    Cookie-Einwilligung. Diese Cookies können nicht deaktiviert werden.
+                    Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO.
+                  </p>
+                </div>
+                <div className="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                  <span className="font-semibold">Funktionale Cookies</span>
+                  <p className="text-sm text-gray-600 mt-1">
+                    Ermöglichen erweiterte Funktionen wie das Speichern von Einstellungen. Optional,
+                    nur mit Ihrer Einwilligung. Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO.
+                  </p>
+                </div>
+                <div className="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                  <span className="font-semibold">Analyse-Cookies</span>
+                  <p className="text-sm text-gray-600 mt-1">
+                    Zur Analyse des Nutzerverhaltens. <strong>Aktuell nicht in Verwendung.</strong>{' '}
+                    Werden nur mit Ihrer ausdrücklichen Einwilligung gesetzt.
+                    Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO.
+                  </p>
+                </div>
+                <div className="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                  <span className="font-semibold">Marketing-Cookies</span>
+                  <p className="text-sm text-gray-600 mt-1">
+                    Für zielgerichtete Werbung. <strong>Aktuell nicht in Verwendung.</strong>{' '}
+                    Werden nur mit Ihrer ausdrücklichen Einwilligung gesetzt.
+                    Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO.
+                  </p>
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-800 mt-6">Einwilligung widerrufen</h3>
+              <p>
+                Sie können Ihre Cookie-Einwilligung jederzeit widerrufen oder anpassen. Klicken Sie
+                dazu auf den Link <strong>„Cookie-Einstellungen"</strong> im Footer der Website oder
+                löschen Sie den Eintrag <code className="bg-gray-100 px-1 rounded text-sm">cookieConsent</code>{' '}
+                manuell in den LocalStorage-Einstellungen Ihres Browsers. Beim nächsten Seitenaufruf
+                erscheint der Cookie-Banner erneut.
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl shadow-sm p-8 border border-gray-100">
+            <div className="flex items-center gap-3 mb-6">
+              <Lock className="w-8 h-8 text-accent" />
+              <h2 className="text-2xl font-bold text-gray-900">4. Weitere Datenerfassung</h2>
+            </div>
+            <div className="space-y-4 text-gray-700 leading-relaxed">
+              <h3 className="text-xl font-semibold text-gray-800">Server-Log-Dateien</h3>
               <p>
                 Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten
                 Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind:
@@ -98,7 +158,7 @@ export default function DatenschutzPage() {
           <div className="bg-white rounded-2xl shadow-sm p-8 border border-gray-100">
             <div className="flex items-center gap-3 mb-6">
               <Mail className="w-8 h-8 text-primary" />
-              <h2 className="text-2xl font-bold text-gray-900">4. SSL- bzw. TLS-Verschlüsselung</h2>
+              <h2 className="text-2xl font-bold text-gray-900">5. SSL- bzw. TLS-Verschlüsselung</h2>
             </div>
             <div className="space-y-4 text-gray-700 leading-relaxed">
               <p>

@@ -1,6 +1,7 @@
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import CookieBanner from '@/components/CookieBanner';
 
 export const metadata = {
   title: {
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
         <Header />
         <main>{children}</main>
         <Footer />
+        <CookieBanner />
       </body>
     </html>
   );

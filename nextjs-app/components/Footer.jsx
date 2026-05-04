@@ -152,6 +152,12 @@ const Footer = () => {
               <Link href="/partner" className="block text-gray-600 hover:text-primary transition-colors">
                 Partner
               </Link>
+              <button
+                onClick={() => window.dispatchEvent(new Event('openCookieSettings'))}
+                className="block text-gray-600 hover:text-primary transition-colors text-left"
+              >
+                Cookie-Einstellungen
+              </button>
             </div>
           </div>
         </div>
