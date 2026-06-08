@@ -1,7 +1,5 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request) {
   try {
     const { name, email, message, company, subject } = await request.json();
@@ -9,6 +7,8 @@ export async function POST(request) {
     if (!name || !email || !message) {
       return Response.json({ error: 'Alle Felder sind erforderlich.' }, { status: 400 });
     }
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     const isPartner = Boolean(company || subject);
     const emailSubject = isPartner
