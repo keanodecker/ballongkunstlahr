@@ -31,6 +31,7 @@ const Header = () => {
     { name: 'Dekoration', path: '/dekoration' },
     { name: 'Galerie', path: '/galerie' },
     { name: 'Blog', path: '/blog' },
+    { name: 'FAQ', path: '/faq' },
   ];
 
   const serviceLinks = [
