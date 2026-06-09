@@ -203,14 +203,19 @@ export default function HomePageContent() {
                 <img
                   src={HERO_SLIDES[slideIndex][0]}
                   alt=""
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-cover animate-ken-burns-cover"
                   fetchpriority={slideIndex === 0 ? 'high' : undefined}
                 />
               ) : (
                 <div className="absolute inset-0 flex gap-1 sm:gap-2 p-1 sm:p-2">
                   {HERO_SLIDES[slideIndex].map((src) => (
                     <div key={src} className="flex-1 h-full overflow-hidden rounded-lg">
-                      <img src={src} alt="" className="w-full h-full object-contain" loading="lazy" />
+                      <img
+                        src={src}
+                        alt=""
+                        className="w-full h-full object-contain animate-ken-burns-contain"
+                        loading="lazy"
+                      />
                     </div>
                   ))}
                 </div>
