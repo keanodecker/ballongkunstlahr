@@ -13,7 +13,7 @@ export default function ReligioseAnlaessePage() {
         serviceId="religiose-anlasse"
         title="Religiöse Anlässe"
         description="Festliche Ballondekoration für religiöse Anlässe. Ob Taufe, Konfirmation oder Kommunion – wir gestalten Ihre Feier mit eleganten, stimmungsvollen Ballons."
-        heroImage="https://images.unsplash.com/photo-1559181567-c3190ca9d222"
+        heroImage="/hero-bg.jpg"
       />
       <ConsultationCTA />
     </>

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Award, Layers, Clock, Leaf, Image as ImageIcon, X, Loader2 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 
-const ServicePage = ({ serviceId, title: defaultTitle, description: defaultDesc, heroImage: defaultHero }) => {
+const ServicePage = ({ serviceId, title: defaultTitle, description: defaultDesc, heroImage: defaultHero, localImages = [] }) => {
   const [title, setTitle] = useState(defaultTitle);
   const [description, setDescription] = useState(defaultDesc);
   const [heroImage, setHeroImage] = useState(defaultHero);
@@ -32,12 +32,23 @@ const ServicePage = ({ serviceId, title: defaultTitle, description: defaultDesc,
     load();
   }, [serviceId]);
 
+  // Use Supabase images when available, otherwise fall back to localImages
+  const displayImages = images.length > 0
+    ? images
+    : localImages.map((url, i) => ({ id: `local-${i}`, image_url: url, caption: null }));
+
   return (
     <div className="pt-20 min-h-screen bg-gray-50">
       {/* Hero */}
       <section className="relative h-[40vh] md:h-[50vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroImage} alt={title} className="w-full h-full object-cover" />
+          <img
+            src={heroImage}
+            alt={title}
+            className="w-full h-full object-cover"
+            fetchpriority="high"
+            onError={(e) => { e.target.src = '/hero-bg.jpg'; }}
+          />
           <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
         </div>
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
@@ -82,15 +93,20 @@ const ServicePage = ({ serviceId, title: defaultTitle, description: defaultDesc,
           <div className="flex justify-center py-12">
             <Loader2 className="w-8 h-8 animate-spin text-pink-400" />
           </div>
-        ) : images.length > 0 ? (
+        ) : displayImages.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-            {images.map((img, i) => (
+            {displayImages.map((img, i) => (
               <motion.div key={img.id}
                 initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.05 }} whileHover={{ scale: 1.03 }}
+                transition={{ delay: i * 0.04 }} whileHover={{ scale: 1.03 }}
                 onClick={() => setSelectedImage(img)}
                 className="aspect-square rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer">
-                <img src={img.image_url} alt={img.caption ?? title} className="w-full h-full object-cover" />
+                <img
+                  src={img.image_url}
+                  alt={img.caption ?? title}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
               </motion.div>
             ))}
           </div>

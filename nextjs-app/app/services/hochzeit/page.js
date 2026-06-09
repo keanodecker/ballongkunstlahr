@@ -6,6 +6,13 @@ export const metadata = {
   description: 'Romantische Ballondekoration für den schönsten Tag. Elegante Dekorationen in Weiß, Gold und Rosé für Ihre Traumhochzeit.',
 };
 
+const LOCAL_IMAGES = [
+  '/gallery/hochzeit-1.jpg',
+  '/gallery/hochzeit-2.jpg',
+  '/gallery/hochzeit-3.jpg',
+  '/gallery/hochzeit-4.jpg',
+];
+
 export default function HochzeitPage() {
   return (
     <>
@@ -13,7 +20,8 @@ export default function HochzeitPage() {
         serviceId="hochzeit"
         title="Hochzeit"
         description="Romantische Ballondekoration für den schönsten Tag. Elegante Dekorationen in Weiß, Gold und Rosé für Ihre Traumhochzeit."
-        heroImage="https://images.unsplash.com/photo-1574913746706-39f69232f7f5"
+        heroImage="/gallery/hochzeit-1.jpg"
+        localImages={LOCAL_IMAGES}
       />
       <ConsultationCTA />
     </>

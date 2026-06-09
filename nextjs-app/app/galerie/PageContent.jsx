@@ -18,17 +18,35 @@ const CATEGORY_LABELS = {
   'halloween': 'Halloween',
   'weihnachten': 'Weihnachten',
   'liebe-valentinstag': 'Valentinstag',
+  'gender-reveal-babyparty': 'Gender Reveal',
+  'religiose-anlasse': 'Religiöse Anlässe',
+  'prufung-abschluss': 'Prüfung & Abschluss',
+  'sonstige-anlasse': 'Sonstige',
 };
 
+// Local images shipped with the site (shown even if Supabase is unavailable)
+const LOCAL_IMAGES = [
+  ...Array.from({ length: 6 }, (_, i) => ({ id: `local-geb-${i + 1}`, image_url: `/gallery/geburtstag-${i + 1}.jpg`, caption: 'Geburtstag Ballondekoration', category: 'geburtstag' })),
+  ...Array.from({ length: 4 }, (_, i) => ({ id: `local-hoch-${i + 1}`, image_url: `/gallery/hochzeit-${i + 1}.jpg`, caption: 'Hochzeit Ballondekoration', category: 'hochzeit' })),
+  ...Array.from({ length: 5 }, (_, i) => ({ id: `local-kind-${i + 1}`, image_url: `/gallery/kinder-${i + 1}.jpg`, caption: 'Kindergeburtstag Ballondekoration', category: 'kindergeburtstag' })),
+];
+
 export default function GalleryPage() {
-  const [allImages, setAllImages] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [allImages, setAllImages] = useState(LOCAL_IMAGES);
+  const [loading, setLoading] = useState(false);
   const [activeFilter, setActiveFilter] = useState('Alle');
   const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
     supabase.from('gallery_images').select('*').order('created_at', { ascending: false })
-      .then(({ data }) => { setAllImages(data ?? []); setLoading(false); });
+      .then(({ data }) => {
+        if (data && data.length > 0) {
+          // Merge Supabase images with local ones, avoiding duplicate image_urls
+          const supaUrls = new Set(data.map((d) => d.image_url));
+          const extras = LOCAL_IMAGES.filter((l) => !supaUrls.has(l.image_url));
+          setAllImages([...data, ...extras]);
+        }
+      });
   }, []);
 
   const categories = ['Alle', ...Array.from(new Set(
@@ -88,7 +106,7 @@ export default function GalleryPage() {
                     exit={{ opacity: 0, scale: 0.9 }} transition={{ duration: 0.3 }}
                     onClick={() => setSelectedItem(item)} whileHover={{ scale: 1.03 }}
                     className="aspect-square rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group relative">
-                    <img src={item.image_url} alt={item.caption ?? ''} className="w-full h-full object-cover" />
+                    <img src={item.image_url} alt={item.caption ?? ''} className="w-full h-full object-cover" loading="lazy" />
                     {(item.caption || item.category) && (
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex flex-col justify-end">
                         <div className="translate-y-full group-hover:translate-y-0 transition-transform duration-300 p-3">
