@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, CalendarDays } from 'lucide-react';
+import { X } from 'lucide-react';
 
 export default function AnnouncementPopup() {
   const [visible, setVisible] = useState(false);
@@ -31,30 +31,74 @@ export default function AnnouncementPopup() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.85, y: 30 }}
               transition={{ type: 'spring', stiffness: 320, damping: 28 }}
-              className="bg-yellow-50 border-2 border-yellow-300 rounded-2xl p-6 max-w-md w-full shadow-2xl relative pointer-events-auto"
+              className="bg-yellow-50 border-2 border-yellow-300 rounded-2xl p-6 max-w-lg w-full shadow-2xl relative pointer-events-auto max-h-[88vh] flex flex-col"
             >
               <button
                 onClick={() => setVisible(false)}
-                className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full hover:bg-yellow-200 transition-colors"
+                className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full hover:bg-yellow-200 transition-colors z-10"
                 aria-label="Schließen"
               >
                 <X className="w-5 h-5 text-yellow-700" />
               </button>
 
-              <div className="flex items-center gap-2 text-yellow-700 mb-3">
-                <CalendarDays className="w-6 h-6 flex-shrink-0" />
-                <span className="font-bold text-lg">Aktuelle Hinweise</span>
+              <div className="flex items-center gap-2 text-yellow-700 mb-4 pr-8">
+                <span className="text-2xl flex-shrink-0">🎈</span>
+                <span className="font-bold text-lg leading-tight">
+                  Wichtige Information für unsere Kunden
+                </span>
               </div>
 
-              <p className="text-yellow-800 leading-relaxed text-sm sm:text-base">
-                Bitte beachten Sie unsere geänderten Öffnungszeiten an Feiertagen. Für besondere
-                Anlässe empfehlen wir eine{' '}
-                <strong>rechtzeitige Vorbestellung</strong> (mindestens 2–3 Tage im Voraus).
-              </p>
+              <div className="text-yellow-900 leading-relaxed text-sm sm:text-base space-y-4 overflow-y-auto pr-1">
+                <p>Liebe Kunden,</p>
+                <p>
+                  bitte beachten Sie unsere geänderten Öffnungszeiten während der Sommerzeit:
+                </p>
+
+                <div>
+                  <p className="font-bold flex items-center gap-2">
+                    <span>☀️</span> Betriebsurlaub
+                  </p>
+                  <p className="mt-1">
+                    Unser Geschäft bleibt vom <strong>15.07. bis einschließlich 22.07.</strong>{' '}
+                    wegen Betriebsurlaub geschlossen.
+                  </p>
+                </div>
+
+                <div>
+                  <p className="font-bold flex items-center gap-2">
+                    <span>☀️</span> Sommeröffnungszeiten im August
+                  </p>
+                  <p className="mt-1">
+                    Im gesamten August sind wir zu folgenden Zeiten für Sie da:
+                  </p>
+                  <div className="mt-3 bg-white/60 rounded-xl p-4 space-y-2">
+                    <div className="flex items-start justify-between gap-3">
+                      <span className="font-medium">Mo, Di, Do &amp; Fr</span>
+                      <span className="whitespace-nowrap">🕤 09:30 – 12:30 Uhr</span>
+                    </div>
+                    <div className="flex items-start justify-between gap-3">
+                      <span className="font-medium">Samstag</span>
+                      <span className="whitespace-nowrap">🕤 09:30 – 13:00 Uhr</span>
+                    </div>
+                    <div className="flex items-start justify-between gap-3">
+                      <span className="font-medium">Mittwoch</span>
+                      <span className="whitespace-nowrap">❌ geschlossen</span>
+                    </div>
+                  </div>
+                </div>
+
+                <p>
+                  Ab September gelten wieder unsere <strong>regulären Öffnungszeiten</strong>.
+                </p>
+                <p>
+                  Vielen Dank für Ihr Verständnis. Wir wünschen Ihnen einen schönen Sommer und
+                  freuen uns auf Ihren Besuch! 🎈😊
+                </p>
+              </div>
 
               <button
                 onClick={() => setVisible(false)}
-                className="mt-5 w-full py-2.5 bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700 text-white font-semibold rounded-xl transition-colors text-sm"
+                className="mt-5 w-full py-2.5 bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700 text-white font-semibold rounded-xl transition-colors text-sm flex-shrink-0"
               >
                 Verstanden &amp; schließen
               </button>
