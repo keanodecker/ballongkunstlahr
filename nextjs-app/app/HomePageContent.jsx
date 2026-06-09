@@ -8,13 +8,19 @@ import {
   CalendarDays, MessageCircle, ChevronDown, HelpCircle,
 } from 'lucide-react';
 
-/* ─── Hero slideshow images ─────────────────────────────────────── */
+/* ─── Hero slideshow ────────────────────────────────────────────────
+   Each slide is an array of 1–2 images. Single images fill the screen
+   (object-cover), pairs show two photos side by side fully visible
+   (object-contain) so you can recognise the motif. At least one image
+   from every service that currently has photos (Geburtstag, Hochzeit,
+   Kindergeburtstag). */
 const HERO_SLIDES = [
-  '/hero-bg.jpg',
-  '/gallery/geburtstag-2.jpg',
-  '/gallery/hochzeit-1.jpg',
-  '/gallery/kinder-1.jpg',
-  '/gallery/geburtstag-4.jpg',
+  ['/hero-bg.jpg'],
+  ['/gallery/geburtstag-1.jpg', '/gallery/geburtstag-2.jpg'],
+  ['/gallery/hochzeit-1.jpg', '/gallery/hochzeit-2.jpg'],
+  ['/gallery/kinder-1.jpg', '/gallery/kinder-2.jpg'],
+  ['/gallery/geburtstag-3.jpg', '/gallery/hochzeit-3.jpg'],
+  ['/gallery/kinder-3.jpg', '/gallery/geburtstag-4.jpg'],
 ];
 
 /* ─── Balloon animation ──────────────────────────────────────────── */
@@ -177,17 +183,39 @@ export default function HomePageContent() {
         {/* Slideshow background */}
         <div className="absolute inset-0">
           <AnimatePresence initial={false}>
-            <motion.img
+            <motion.div
               key={slideIndex}
-              src={HERO_SLIDES[slideIndex]}
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1.2 }}
-              fetchpriority={slideIndex === 0 ? 'high' : undefined}
-            />
+            >
+              {/* Blurred fill so contained images never leave empty bars */}
+              <img
+                src={HERO_SLIDES[slideIndex][0]}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-60"
+              />
+              {/* Foreground image(s) */}
+              {HERO_SLIDES[slideIndex].length === 1 ? (
+                <img
+                  src={HERO_SLIDES[slideIndex][0]}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover"
+                  fetchpriority={slideIndex === 0 ? 'high' : undefined}
+                />
+              ) : (
+                <div className="absolute inset-0 flex gap-1 sm:gap-2 p-1 sm:p-2">
+                  {HERO_SLIDES[slideIndex].map((src) => (
+                    <div key={src} className="flex-1 h-full overflow-hidden rounded-lg">
+                      <img src={src} alt="" className="w-full h-full object-contain" loading="lazy" />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </motion.div>
           </AnimatePresence>
           <div className="absolute inset-0 bg-black/40" />
         </div>
