@@ -6,6 +6,15 @@ export const metadata = {
   description: 'Feiern Sie Ihren besonderen Tag mit bunten Ballons. Von klassischen Zahlenballons bis zu personalisierten Geburtstagsballons – wir haben alles für Ihre Feier.',
 };
 
+const LOCAL_IMAGES = [
+  '/gallery/geburtstag-1.jpg',
+  '/gallery/geburtstag-2.jpg',
+  '/gallery/geburtstag-3.jpg',
+  '/gallery/geburtstag-4.jpg',
+  '/gallery/geburtstag-5.jpg',
+  '/gallery/geburtstag-6.jpg',
+];
+
 export default function GeburtstagPage() {
   return (
     <>
@@ -13,7 +22,8 @@ export default function GeburtstagPage() {
         serviceId="geburtstag"
         title="Geburtstag"
         description="Feiern Sie Ihren besonderen Tag mit bunten Ballons. Von klassischen Zahlenballons bis zu personalisierten Geburtstagsballons – wir haben alles für Ihre Feier. (Auswahl an Servietten, Tellern, Bechern…)"
-        heroImage="https://images.unsplash.com/photo-1485707302660-6ca974f1ae0a"
+        heroImage="/gallery/geburtstag-1.jpg"
+        localImages={LOCAL_IMAGES}
       />
 
       {/* Individuelle Dekoration Section */}

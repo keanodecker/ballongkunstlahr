@@ -6,6 +6,14 @@ export const metadata = {
   description: 'Bunte Motivballons für den Kindergeburtstag. Von Dinosauriern über Prinzessinnen bis zu Piraten.',
 };
 
+const LOCAL_IMAGES = [
+  '/gallery/kinder-1.jpg',
+  '/gallery/kinder-2.jpg',
+  '/gallery/kinder-3.jpg',
+  '/gallery/kinder-4.jpg',
+  '/gallery/kinder-5.jpg',
+];
+
 export default function KindergeburtstagPage() {
   return (
     <>
@@ -13,7 +21,8 @@ export default function KindergeburtstagPage() {
         serviceId="kindergeburtstag"
         title="Kindergeburtstag"
         description="Spaß und Freude für die Kleinen! Bunte Motivballons mit beliebten Charakteren, Tieren und Superhelden."
-        heroImage="https://images.unsplash.com/photo-1558618666-fcd25c85cd64"
+        heroImage="/gallery/kinder-1.jpg"
+        localImages={LOCAL_IMAGES}
       />
       <ConsultationCTA />
     </>

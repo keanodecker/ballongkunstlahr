@@ -574,12 +574,17 @@ function FAQItem({ item, isOpen, onToggle }) {
 
 export default function FAQPageContent() {
   const [openKey, setOpenKey] = useState(null);
+  const [activeCategory, setActiveCategory] = useState(null);
+
+  const visibleCategories = activeCategory
+    ? faqCategories.filter((cat) => cat.category === activeCategory)
+    : faqCategories;
 
   return (
     <div className="pt-32 pb-20 bg-gray-50 min-h-screen">
       <div className="container mx-auto px-4 max-w-4xl">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-10">
           <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
             <HelpCircle className="w-10 h-10 text-primary" />
           </div>
@@ -605,27 +610,68 @@ export default function FAQPageContent() {
           </motion.p>
         </div>
 
-        {/* Categories */}
-        <div className="space-y-10">
+        {/* Category Filter */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="flex flex-wrap gap-2 justify-center mb-10"
+        >
+          <button
+            onClick={() => { setActiveCategory(null); setOpenKey(null); }}
+            className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+              activeCategory === null
+                ? 'bg-primary text-white shadow-md'
+                : 'bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary'
+            }`}
+          >
+            Alle
+          </button>
           {faqCategories.map((cat) => (
-            <div key={cat.category}>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 px-1">{cat.category}</h2>
-              <div className="space-y-3">
-                {cat.items.map((item) => {
-                  const key = `${cat.category}-${item.q}`;
-                  return (
-                    <FAQItem
-                      key={key}
-                      item={item}
-                      isOpen={openKey === key}
-                      onToggle={() => setOpenKey(openKey === key ? null : key)}
-                    />
-                  );
-                })}
-              </div>
-            </div>
+            <button
+              key={cat.category}
+              onClick={() => { setActiveCategory(cat.category); setOpenKey(null); }}
+              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                activeCategory === cat.category
+                  ? 'bg-primary text-white shadow-md'
+                  : 'bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary'
+              }`}
+            >
+              {cat.category}
+            </button>
           ))}
-        </div>
+        </motion.div>
+
+        {/* Categories */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory ?? 'all'}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="space-y-10"
+          >
+            {visibleCategories.map((cat) => (
+              <div key={cat.category}>
+                <h2 className="text-2xl font-bold text-gray-900 mb-4 px-1">{cat.category}</h2>
+                <div className="space-y-3">
+                  {cat.items.map((item) => {
+                    const key = `${cat.category}-${item.q}`;
+                    return (
+                      <FAQItem
+                        key={key}
+                        item={item}
+                        isOpen={openKey === key}
+                        onToggle={() => setOpenKey(openKey === key ? null : key)}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

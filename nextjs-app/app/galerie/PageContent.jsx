@@ -18,6 +18,10 @@ const CATEGORY_LABELS = {
   'halloween': 'Halloween',
   'weihnachten': 'Weihnachten',
   'liebe-valentinstag': 'Valentinstag',
+  'gender-reveal-babyparty': 'Gender Reveal',
+  'religiose-anlasse': 'Religiöse Anlässe',
+  'prufung-abschluss': 'Prüfung & Abschluss',
+  'sonstige-anlasse': 'Sonstige',
 };
 
 export default function GalleryPage() {
