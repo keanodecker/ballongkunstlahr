@@ -181,7 +181,7 @@ const Footer = () => {
               alt="Media Castle"
               width={34}
               height={34}
-              className="flex-shrink-0"
+              className="flex-shrink-0 opacity-70"
             />
             <span className="flex flex-col" style={{ lineHeight: 1.02 }}>
               <span
