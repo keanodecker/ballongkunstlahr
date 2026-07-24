@@ -162,10 +162,42 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-gray-200 text-center">
-          <p className="text-gray-600">
+        <div className="mt-12 pt-8 border-t border-gray-200 flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
+          <p className="text-gray-600 text-center sm:text-left">
             © {new Date().getFullYear()} Ballonkunst Lahr. Alle Rechte vorbehalten.
           </p>
+
+          {/* Visualized by media castle */}
+          <a
+            href="https://www.media-castle.de"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visualized by media castle – zur Media Castle Webseite"
+            className="group inline-flex items-center gap-3 transition-opacity duration-300 hover:opacity-80"
+          >
+            <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-[#1f2a44] transition-transform duration-300 group-hover:scale-105">
+              <svg
+                viewBox="0 0 24 24"
+                className="h-5 w-5 text-white"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M2 19h20L15 7l-4 6-2.5-3L2 19z"
+                  fill="currentColor"
+                />
+                <circle cx="17.5" cy="6.5" r="1.6" fill="currentColor" />
+              </svg>
+            </span>
+            <span className="flex flex-col leading-none">
+              <span className="text-[0.6rem] font-semibold uppercase tracking-[0.28em] text-slate-400">
+                Visualized by
+              </span>
+              <span className="mt-1 text-lg font-bold tracking-tight text-[#1f2a44]">
+                media castle
+              </span>
+            </span>
+          </a>
         </div>
       </div>
     </footer>
