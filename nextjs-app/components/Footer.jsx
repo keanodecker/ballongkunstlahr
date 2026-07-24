@@ -162,8 +162,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-gray-200 flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
-          <p className="text-gray-600 text-center sm:text-left">
+        <div className="mt-12 pt-8 border-t border-gray-200 flex flex-col items-center gap-6">
+          <p className="text-gray-600 text-center">
             © {new Date().getFullYear()} Ballonkunst Lahr. Alle Rechte vorbehalten.
           </p>
 
