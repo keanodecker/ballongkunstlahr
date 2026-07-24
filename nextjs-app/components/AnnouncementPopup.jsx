@@ -56,16 +56,6 @@ export default function AnnouncementPopup() {
 
                 <div>
                   <p className="font-bold flex items-center gap-2">
-                    <span>☀️</span> Betriebsurlaub
-                  </p>
-                  <p className="mt-1">
-                    Unser Geschäft bleibt vom <strong>15.07. bis einschließlich 22.07.</strong>{' '}
-                    wegen Betriebsurlaub geschlossen.
-                  </p>
-                </div>
-
-                <div>
-                  <p className="font-bold flex items-center gap-2">
                     <span>☀️</span> Sommeröffnungszeiten im August
                   </p>
                   <p className="mt-1">
