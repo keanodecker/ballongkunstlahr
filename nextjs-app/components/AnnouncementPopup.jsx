@@ -63,12 +63,8 @@ export default function AnnouncementPopup() {
                   </p>
                   <div className="mt-3 bg-white/60 rounded-xl p-4 space-y-2">
                     <div className="flex items-start justify-between gap-3">
-                      <span className="font-medium">Mo, Di &amp; Fr</span>
+                      <span className="font-medium">Mo, Di, Do &amp; Fr</span>
                       <span className="whitespace-nowrap">🕤 09:30 – 12:30 Uhr</span>
-                    </div>
-                    <div className="flex items-start justify-between gap-3">
-                      <span className="font-medium">Donnerstag</span>
-                      <span className="whitespace-nowrap">🕤 16:00 – 18:00 Uhr</span>
                     </div>
                     <div className="flex items-start justify-between gap-3">
                       <span className="font-medium">Samstag</span>
@@ -79,6 +75,17 @@ export default function AnnouncementPopup() {
                       <span className="whitespace-nowrap">❌ geschlossen</span>
                     </div>
                   </div>
+                </div>
+
+                <div className="bg-yellow-100 border border-yellow-300 rounded-xl p-4">
+                  <p className="font-bold flex items-center gap-2">
+                    <span>⚠️</span> Einmalige Ausnahme
+                  </p>
+                  <p className="mt-1">
+                    <strong>Nur am Donnerstag, den 30.07.</strong> haben wir abweichend
+                    ausschließlich von <strong>16:00 – 18:00 Uhr</strong> geöffnet. An allen
+                    anderen Donnerstagen gelten die regulären Zeiten (09:30 – 12:30 Uhr).
+                  </p>
                 </div>
 
                 <p>
