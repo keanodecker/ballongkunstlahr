@@ -49,19 +49,6 @@ export default function AnnouncementPopup() {
               </div>
 
               <div className="text-yellow-900 leading-relaxed text-sm sm:text-base space-y-4 overflow-y-auto pr-1">
-                <div className="bg-red-600 text-white rounded-xl p-4 shadow-md">
-                  <p className="font-extrabold text-base sm:text-lg flex items-center gap-2 uppercase tracking-wide">
-                    <span className="text-2xl">⚠️</span> Einmalige Ausnahme
-                  </p>
-                  <p className="mt-2 font-bold text-base sm:text-lg leading-snug">
-                    Nur diesen Donnerstag, den 30.07., haben wir ausschließlich von{' '}
-                    <span className="underline decoration-2">16:00 – 18:00 Uhr</span> geöffnet!
-                  </p>
-                  <p className="mt-2 text-sm text-red-50">
-                    An allen anderen Donnerstagen gelten die regulären Zeiten (09:30 – 12:30 Uhr).
-                  </p>
-                </div>
-
                 <p>Liebe Kunden,</p>
                 <p>
                   bitte beachten Sie unsere geänderten Öffnungszeiten während der Sommerzeit:
