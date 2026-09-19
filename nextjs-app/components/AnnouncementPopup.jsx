@@ -4,13 +4,20 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
+// Auf `false` gesetzt, wenn es keine aktuelle Ankündigung gibt (Sommeröffnungszeiten sind vorbei).
+// Zum Reaktivieren einfach wieder auf `true` setzen und den Text unten anpassen.
+const ANNOUNCEMENT_ACTIVE = false;
+
 export default function AnnouncementPopup() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    if (!ANNOUNCEMENT_ACTIVE) return;
     const timer = setTimeout(() => setVisible(true), 600);
     return () => clearTimeout(timer);
   }, []);
+
+  if (!ANNOUNCEMENT_ACTIVE) return null;
 
   return (
     <AnimatePresence>
